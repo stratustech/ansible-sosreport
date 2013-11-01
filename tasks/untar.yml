@@ -1,0 +1,11 @@
+---
+# Task: Untar sosreport diagnostics
+
+- name: Locally untar the sosreport archives
+  local_action: shell tar xJf {{ diag_path}}/{{ ansible_hostname }}/{{ diag_filename}} -C {{ diag_path}}/{{ ansible_hostname }} --strip-components=1
+
+- name: Make all local files writable (otherwise they cannot later be deleted)
+  local_action: shell chmod -R +w {{ diag_path}}/{{ ansible_hostname }}
+
+- name: Remove the sosreport archive, which has now been untar\'d
+  local_action: rm -f {{ diag_path}}/{{ ansible_hostname }}/{{ diag_filename}}
