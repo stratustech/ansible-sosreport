@@ -1,0 +1,26 @@
+---
+# Task:  Run sosreport to generate diagnostics
+#
+# Variables:
+#   $tmpdir is the remote tmp directory to use for diag creation
+#   $diag_filename is the base 
+
+- name: Clean tmpdir $tmpdir
+  file: path=$tmpdir state=absent
+
+- name: Create empty tmpdir $tmpdir
+  file: path=$tmpdir state=directory
+
+- name: Run PATH=$sosreport_path:\$PATH $sosreport_cmd $sosreport_args to generate $diag_filename in tmpdir $tmpdir
+  shell: "PATH={{ sosreport_path }}:$PATH {{ sosreport_cmd }} {{ sosreport_args }} --batch --tmp-dir {{ tmpdir }}"
+  when: sosreport_path is defined
+
+- name: Run $sosreport_cmd to generate $diag_filename in $tmpdir
+  shell: "{{ sosreport_cmd }} {{ sosreport_args }} --batch --tmp-dir {{ tmpdir }}"
+  when: sosreport_path is not defined
+
+- name: Rename sosreport MD5 file to $diag_filename.md5
+  shell: mv -f {{ tmpdir }}/*.md5 {{ tmpdir }}/{{ diag_filename }}.md5
+
+- name: Rename sosreport archive file to $diag_filename
+  shell: mv -f {{ tmpdir }}/*.tar.xz {{ tmpdir }}/{{ diag_filename }}

@@ -1,0 +1,20 @@
+---
+# Task:  Install custom, locally provided sosreport packages,
+#        whose local pathes are specified by the $rpm and $deb
+#        variables, respectively.
+
+- name: Copy sosreport RPM
+  copy: src=$rpm dest=/var/tmp/{{ rpm|basename }}
+  when: ansible_os_family == "RedHat"
+
+- name: Install sosreport RPM
+  yum:  name=/var/tmp/{{ rpm|basename }} state=present
+  when: ansible_os_family == "RedHat"
+
+- name: Copy sosreport DEB
+  copy: src=$deb dest=/var/tmp/{{ deb|basename }}
+  when: ansible_os_family == "Debian"
+
+- name: Install sosreport DEB
+  shell: dpkg -i /var/tmp/{{ deb|basename }}
+  when: ansible_os_family == "Debian"

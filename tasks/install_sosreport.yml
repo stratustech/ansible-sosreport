@@ -1,0 +1,10 @@
+---
+# Task:  Install sosreport package
+
+- name: yum install sosreport
+  yum:  name=sosreport
+  when: ansible_os_family == "RedHat"
+
+- name: Install sosreport DEB
+  apt: pkg=sosreport
+  when: ansible_os_family == "Debian"

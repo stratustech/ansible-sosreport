@@ -1,0 +1,27 @@
+---
+
+#
+# Example sosreport playbook configuration options which can be set in `custom.yml` or via the command-line
+#
+
+# sosreport arguments (Note: do not pass --batch and --tmp-dir as those are set by default)
+#sosreport_args:  --alloptions
+
+# Prepend PATH to look for sosreport
+#sosreport_path:  /opt/sosreport/bin
+
+# Name of the sosreport executable
+#sosreport_cmd: sosreport-custom-exe
+
+# Default path to put the collected diags (can override from command-line)
+#diag_path: /path/to/local/diags
+
+# Name of the collected diag files
+#diag_filename: acme-sosreport.tar.xz
+
+# Install custom sosreport packages, rather than the OS distro defaults
+#custom_sosreport_pkgs: yes
+
+# Local path to custom sosreport packages (required if custom_sosreport_pkgs)
+#rpm: pkg/sosreport.rpm
+#deb: pkg/sosreport.deb

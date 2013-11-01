@@ -1,0 +1,52 @@
+---
+# Grab logs from all servers
+- hosts: all
+
+  # Playbook vars, which can be overridden through a custom `config/config.yml` file
+  # or through the command-line (e.g. `ansible-playbook -e diag_path=$HOME`)
+  vars:
+
+    # Name of the sosreport executable
+    - sosreport_args:
+
+    # Name of the sosreport executable
+    - sosreport_cmd: sosreport
+
+    # Default path to put the collected diags (can override from command-line)
+    - diag_path: diags
+
+    # Name of the collected diag files
+    - diag_filename: diag.tar.xz
+
+    # Remote tmp directory to create diag files in (will be deleted, recreated - so be careful)
+    - tmpdir: /var/tmp/sos-ansible
+
+  vars_files:
+    # Can use to defines $deb and $rpm packages, when $custom_sosreport_pkgs is true
+    - [ "config/custom.yml", "config/default.yml" ]
+
+  tasks:
+
+    - include: tasks/install_sosreport.yml
+      when: not custom_sosreport_pkgs|bool
+
+    - include: tasks/install_custom_sosreport.yml
+      when: custom_sosreport_pkgs|bool
+
+    - include: tasks/run_sosreport.yml
+
+    - name: Fetch sosreport archive md5
+      fetch: >
+        src=$tmpdir/$diag_filename.md5
+        dest=/tmp/jsos/{{ ansible_hostname }}/
+        fail_on_missing=yes
+        flat=yes
+        validate_md5=yes
+
+    - name: Fetch sosreport archives
+      fetch: >
+        src=$tmpdir/$diag_filename
+        dest=$diag_path/{{ ansible_hostname }}/
+        flat=yes
+        validate_md5=no
+
