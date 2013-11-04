@@ -60,7 +60,7 @@ packages built from source, you could create a `config/custom.yml` file as follo
 ```
 ---
 sosreport_path: /opt/sosreport/bin
-custom_sosreport_pkgs: no
+custom_sosreport_pkgs: yes
 rpm: pkg/sosreport-3.0_master-1.el6.x86_64.rpm
 deb: pkg/sosreport_3.0-master-1.ubuntu.12.04_amd64.deb
 ```
