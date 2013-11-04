@@ -1,9 +1,22 @@
 Ansible Playbook for Sosreport
 ==============================
 
+[![Build Status](https://travis-ci.org/jdutton/ansible-sosreport.png)](https://travis-ci.org/jdutton/ansible-sosreport)
+
 This playbook provides the `generate.yml` play to install a locally provided
 `sosreport` package, run `sosreport` to generate a diagnostic tarball and then
 fetch the tarballs from all hosts to a local directory.
+
+# Prerequisites
+
+You must have [Ansible](http://www.ansibleworks.com) installed (see
+[Ansible Installation](http://www.ansibleworks.com/docs/intro_installation.html)
+for directions).  You must also either have an
+[ansible inventory file](http://www.ansibleworks.com/docs/intro_inventory.html)
+that enumerates the hosts in your environment or call `ansible-playbook` with the
+`-i` flag, specifying comma-separated hostnames explicitly.
+
+# Playbook Configuration
 
 See [config/default.yml](config/default.yml) for playbook configuration variables.
 Configuration variables can either be set through a `config/custom.yml` file or
