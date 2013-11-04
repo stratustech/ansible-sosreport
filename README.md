@@ -1,7 +1,7 @@
 Ansible Playbook for Sosreport
 ==============================
 
-[![Build Status](https://travis-ci.org/jdutton/ansible-sosreport.png)](https://travis-ci.org/jdutton/ansible-sosreport)
+[![Build Status](https://travis-ci.org/stratustech/ansible-sosreport.png)](https://travis-ci.org/stratustech/ansible-sosreport)
 
 This playbook provides the `generate.yml` play to install a locally provided
 `sosreport` package, run `sosreport` to generate a diagnostic tarball and then
