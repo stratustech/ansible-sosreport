@@ -1,13 +1,16 @@
 ---
 # Grab logs from all servers
 - hosts: all
+  
+  # Limit number of hosts to run on simultaneously
+  serial: 4
 
   # Playbook vars, which can be overridden through a custom `config/config.yml` file
   # or through the command-line (e.g. `ansible-playbook -e diag_path=$HOME`)
   vars:
 
     # Name of the sosreport executable
-    - sosreport_args:
+    - sosreport_args: ''
 
     # Name of the sosreport executable
     - sosreport_cmd: sosreport
