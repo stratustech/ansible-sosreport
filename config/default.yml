@@ -20,7 +20,7 @@
 #diag_filename: acme-sosreport.tar.xz
 
 # Install custom sosreport packages, rather than the OS distro defaults
-#custom_sosreport_pkgs: yes
+custom_sosreport_pkgs: no
 
 # Local path to custom sosreport packages (required if custom_sosreport_pkgs)
 #rpm: pkg/sosreport.rpm
